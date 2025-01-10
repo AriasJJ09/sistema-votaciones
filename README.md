@@ -20,7 +20,8 @@ Este proyecto es una API RESTful diseñada para gestionar un sistema de votacion
 - **MySQL**: Base de datos relacional para almacenar información de votantes, candidatos y votos.  
 - **Sequelize**: ORM para interactuar con la base de datos MySQL.  
 - **dotenv**: Gestión de variables de entorno.  
-- **Nodemon**: Herramienta para reiniciar automáticamente el servidor durante el desarrollo.  
+- **Nodemon**: Herramienta para reiniciar automáticamente el servidor durante el desarrollo.
+- **Swagger**: Herramienta para generar documentación y probar la API directamente desde el editor.
 
 ---
 ## Endpoints de la API
@@ -156,6 +157,7 @@ npx nodemon index.js
 {
   "name": "Juan Pérez",
   "email": "juan.perez@example.com"
+  "has_voted": false
 }
 ```
 
