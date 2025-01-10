@@ -163,6 +163,9 @@ npx nodemon index.js
 - **URL:** `http://localhost:3000/votes/statistics`
 - **Método:** GET
 
+## Ejemplos en Postman
+Los ejemplos se pueden visualizar en un documento drive [Peticiones probadas desde postman](https://docs.google.com/document/d/1E8vX6cU0BK7s5HWPMjkp6yPTs_ScMHADIf5JNHjwHhM/edit?usp=sharing).
+
 ## **Documentación Swagger**
 
 La API está documentada usando Swagger. Puedes acceder a la documentación interactiva en la siguiente URL:
