@@ -176,7 +176,3 @@ La API está documentada usando Swagger. Puedes acceder a la documentación inte
 
 Esta documentación permite explorar y probar los endpoints directamente desde el navegador.
 
-
-## Licencia
-Este proyecto está bajo la licencia MIT.
-
