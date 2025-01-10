@@ -47,7 +47,7 @@ Este proyecto es una API RESTful diseñada para gestionar un sistema de votacion
 | Método | Endpoint         | Descripción                             |
 |--------|------------------|-----------------------------------------|
 | POST   | `/candidates`    | Registrar un nuevo candidato.           |
-| GET    | `/candidates`    | Obtener la lista de candidatos. Soporta filtrado por `party` y paginación. |
+| GET    | `/candidates`    | Obtener la lista de candidatos. Soporta filtrado por `party`. |
 | GET    | `/candidates/:id`| Obtener detalles de un candidato por ID.|
 | DELETE | `/candidates/:id`| Eliminar un candidato por ID.           |
 
