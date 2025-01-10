@@ -1,0 +1,368 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "sistema_votaciones",
+    "version": "1.0.0",
+    "description": "API para gestionar un sistema de votaciones, incluyendo el registro de votantes y candidatos, el registro de votos y la obtención de estadísticas."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/voters": {
+      "post": {
+        "tags": [
+          "Voters"
+        ],
+        "summary": "Registrar un nuevo votante",
+        "description": "Este endpoint permite registrar un nuevo votante en el sistema. Se debe proporcionar el nombre, correo electrónico y si el votante ya ha votado o no.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Correo electrónico del votante, debe ser único."
+                  },
+                  "has_voted": {
+                    "type": "boolean",
+                    "description": "Indica si el votante ya ha emitido su voto (por defecto es false)."
+                  }
+                },
+                "example": {
+                  "name": "Juan Arias",
+                  "email": "juan.ar@ejemplo.com",
+                  "has_voted": false
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Votante registrado exitosamente"
+          },
+          "400": {
+            "description": "Solicitud incorrecta"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Voters"
+        ],
+        "summary": "Obtener la lista de votantes",
+        "description": "Este endpoint permite obtener la lista de votantes. Soporta filtrado por `has_voted` y paginación.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Número de página (por defecto: 1)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Número de resultados por página (por defecto: 10)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "has_voted",
+            "in": "query",
+            "description": "Filtrar por si el votante ha votado (`true` o `false`)",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de votantes obtenida exitosamente"
+          },
+          "500": {
+            "description": "Error al obtener los votantes"
+          }
+        }
+      }
+    },
+    "/voters/{id}": {
+      "get": {
+        "tags": [
+          "Voters"
+        ],
+        "summary": "Obtener detalles de un votante por ID",
+        "description": "Este endpoint permite obtener los detalles de un votante por su ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del votante obtenidos exitosamente"
+          },
+          "404": {
+            "description": "Votante no encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Voters"
+        ],
+        "summary": "Eliminar un votante por ID",
+        "description": "Este endpoint permite eliminar un votante por su ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Votante eliminado exitosamente"
+          },
+          "404": {
+            "description": "Votante no encontrado"
+          }
+        }
+      }
+    },
+    "/candidates": {
+      "post": {
+        "tags": [
+          "Candidates"
+        ],
+        "summary": "Registrar un nuevo candidato",
+        "description": "Este endpoint permite registrar un nuevo candidato en el sistema. Se debe proporcionar el nombre y el partido del candidato.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "party": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Maria Lopez",
+                  "party": "Partido Democrático"
+                },
+                "required": ["name", "party"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Candidato registrado exitosamente"
+          },
+          "400": {
+            "description": "Solicitud incorrecta"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Candidates"
+        ],
+        "summary": "Obtener la lista de candidatos",
+        "description": "Este endpoint permite obtener la lista de candidatos. Soporta filtrado por `party` y paginación.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Número de página (por defecto: 1)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Número de resultados por página (por defecto: 10)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "party",
+            "in": "query",
+            "description": "Filtrar por el partido del candidato",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de candidatos obtenida exitosamente"
+          },
+          "500": {
+            "description": "Error al obtener los candidatos"
+          }
+        }
+      }
+    },
+    "/candidates/{id}": {
+      "get": {
+        "tags": [
+          "Candidates"
+        ],
+        "summary": "Obtener detalles de un candidato por ID",
+        "description": "Este endpoint permite obtener los detalles de un candidato por su ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del candidato obtenidos exitosamente"
+          },
+          "404": {
+            "description": "Candidato no encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Candidates"
+        ],
+        "summary": "Eliminar un candidato por ID",
+        "description": "Este endpoint permite eliminar un candidato por su ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Candidato eliminado exitosamente"
+          },
+          "404": {
+            "description": "Candidato no encontrado"
+          }
+        }
+      }
+    },
+    "/votes": {
+      "post": {
+        "tags": [
+          "Votes"
+        ],
+        "summary": "Emitir un voto",
+        "description": "Este endpoint permite emitir un voto. Se debe proporcionar el ID del votante y el ID del candidato.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "voter_id": {
+                    "type": "integer"
+                  },
+                  "candidate_id": {
+                    "type": "integer"
+                  }
+                },
+                "example": {
+                  "voter_id": 1,
+                  "candidate_id": 2
+                },
+                "required": ["voter_id", "candidate_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Voto emitido exitosamente"
+          },
+          "400": {
+            "description": "Solicitud incorrecta"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Votes"
+        ],
+        "summary": "Obtener todos los votos emitidos",
+        "description": "Este endpoint permite obtener todos los votos emitidos.",
+        "responses": {
+          "200": {
+            "description": "Lista de votos obtenida exitosamente"
+          },
+          "500": {
+            "description": "Error al obtener los votos"
+          }
+        }
+      }
+    },
+    "/votes/statistics": {
+      "get": {
+        "tags": [
+          "Votes"
+        ],
+        "summary": "Obtener estadísticas de la votación",
+        "description": "Este endpoint permite obtener estadísticas de la votación, incluyendo el total y porcentaje de votos por candidato.",
+        "responses": {
+          "200": {
+            "description": "Estadísticas de la votación obtenidas exitosamente"
+          },
+          "500": {
+            "description": "Error al obtener las estadísticas"
+          }
+        }
+      }
+    }
+  }
+}
