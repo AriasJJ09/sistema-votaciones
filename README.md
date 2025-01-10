@@ -20,7 +20,8 @@ Este proyecto es una API RESTful diseñada para gestionar un sistema de votacion
 - **MySQL**: Base de datos relacional para almacenar información de votantes, candidatos y votos.  
 - **Sequelize**: ORM para interactuar con la base de datos MySQL.  
 - **dotenv**: Gestión de variables de entorno.  
-- **Nodemon**: Herramienta para reiniciar automáticamente el servidor durante el desarrollo.  
+- **Nodemon**: Herramienta para reiniciar automáticamente el servidor durante el desarrollo.
+- **Swagger**: Herramienta para generar documentación y probar la API directamente desde el editor.
 
 ---
 ## Endpoints de la API
@@ -156,12 +157,16 @@ npx nodemon index.js
 {
   "name": "Juan Pérez",
   "email": "juan.perez@example.com"
+  "has_voted": false
 }
 ```
 
 ### Ejemplo de solicitud GET para obtener estadísticas de votos:
 - **URL:** `http://localhost:3000/votes/statistics`
 - **Método:** GET
+
+## Ejemplos en Postman
+Los ejemplos se pueden visualizar en un documento drive [Peticiones probadas desde postman](https://docs.google.com/document/d/1E8vX6cU0BK7s5HWPMjkp6yPTs_ScMHADIf5JNHjwHhM/edit?usp=sharing).
 
 ## **Documentación Swagger**
 
@@ -170,8 +175,4 @@ La API está documentada usando Swagger. Puedes acceder a la documentación inte
 [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
 
 Esta documentación permite explorar y probar los endpoints directamente desde el navegador.
-
-
-## Licencia
-Este proyecto está bajo la licencia MIT.
 
